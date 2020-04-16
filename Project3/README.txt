@@ -6,7 +6,7 @@
 ------------------------------------------------------------
 
 Setup:
-  - Move whole "enpm661_project3_jensen_ropelato"-folder to your /catkin_ws/src folder.
+  - Move whole "enpm661_project3_jensen_ropelato"-folder to /catkin_ws/src folder (Catkin Workspace)
   - Build package ($ catkin_make  in /catkin_ws)
 
 ------------------------------------------------------------
