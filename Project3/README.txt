@@ -12,9 +12,9 @@ Setup:
 ------------------------------------------------------------
 
 Run:
-  - Run the following line terminal:
+  - Run the following line terminal:  (list of arguments see below)
     $ roslaunch enpm661_project3_jensen_ropelato enpm661_project3.launch arg1:=VALUE1 arg2:=VALUE2 ...
-    (list of arguments see below)
+    
 
   This launches Gazebo and starts the path-finding algorithm. (A Figure will open which shows the progress)
   When the goal is found, Close the Python Plot (Figure) which will start the publisher and run the robot in Gazebo.
