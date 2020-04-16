@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="debug" default="false" />
+  <arg name="gui" default="true" />
+  <arg name="pause" default="false" />
+  <arg name="world" default="$(find testWorld)/world/map.world" />
+  <arg name="xStart" default="-4.2" />
+  <arg name="yStart" default="-3.2" />
+  <arg name="thetaStart" default="0" />
+  <arg name="xGoal" default="0" />
+  <arg name="yGoal" default="-3.2" />
+  <arg name="rpm1" default="90" />
+  <arg name="rpm2" default="200" />
+  <arg name="clearance" default="0.3" />
+  <arg name="occupation_grid_size" default="0.1" />
+  <arg name="timestep" default="1.0" />
+
+
+
+  <arg name="x_pos" default=""/>
+  <arg name="y_pos" default="-4.3"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="yaw-angle" default="-0.001"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg pause)"/>
+    <arg name="use_sim_time" value="true"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find enpm661_project3_jensen_ropelato)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model turtlebot3_waffle_pi -x $(arg xStart) -y $(arg yStart) -z 0.0 -Y $(arg thetaStart) -param robot_description" />
+
+  <node pkg="enpm661_project3_jensen_ropelato" name="path_mover" type="path_mover.py" output="screen">
+    <param name="clearance" value="0.3" />
+    <param name="startX" value="$(arg xStart)" />
+    <param name="startY" value="$(arg yStart)" />
+    <param name="startTheta" value="$(arg thetaStart)" />
+    <param name="goalX" value="$(arg xGoal)" />
+    <param name="goalY" value="$(arg yGoal)" />
+    <param name="rpm1" value="$(arg rpm1)" />
+    <param name="rpm2" value="$(arg rpm2)" />
+    <param name="occupation_grid_size" value="$(arg occupation_grid_size)" />
+    <param name="timestep" value="$(arg timestep)" />
+  </node>
+
+
+
+</launch>
